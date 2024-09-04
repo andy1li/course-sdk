@@ -36,12 +36,12 @@ export default class TesterDownloader {
     console.log(`Downloading ${artifactUrl}`);
 
     let i = 0;
-    const limit = 1024;
+    const limit = 256;
 
     const inspector = new Transform({
       transform(chunk, encoding, callback) {
         if (chunk.toString().length > 0) {
-          i++;
+          i += chunk.toString().length;
         }
         if (i < limit) {
           console.log("Chunk:", chunk.toString());
