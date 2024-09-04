@@ -72,6 +72,8 @@ jobs:
         working-directory: courses/${{github.event.repository.name}}
 
       - run: ls -lah $HOME
+      - run: ls -lah $HOME/sqlite
+      - run: "[ -d $HOME/sqlite ] && exit 1"
       - run: "[ ! -d $HOME/sqlite ] && exit 1"
       # - run: "[ ! -d /tmp/testers/sqlite ] && exit 1"
 
