@@ -68,17 +68,17 @@ jobs:
       - run: git config --global user.email "hello@codecrafters.io"
       - run: git config --global user.name "codecrafters-bot"
 
-      - run: course-sdk test ${{matrix.language}} && cp -r /tmp/testers/${{github.event.repository.name}} $HOME/
+      - run: course-sdk test ${{matrix.language}} && cp -r /tmp/testers/${{matrix.language}} $HOME/
         working-directory: courses/${{github.event.repository.name}}
 
       - name: sanity-check
         run: |
           ls -lah $HOME
-          ls -lah $HOME/testers/${{github.event.repository.name}}
-          if [ -d $HOME/testers/${{github.event.repository.name}} ]; then
-            echo ${{github.event.repository.name}} "tester directory exists."
+          ls -lah $HOME/testers/${{matrix.language}}
+          if [ -d $HOME/testers/${{matrix.language}} ]; then
+            echo ${{matrix.language}} "tester directory exists."
           else
-            echo ${{github.event.repository.name}} "tester directory does not exist."
+            echo ${{matrix.language}} "tester directory does not exist."
             exit 1
           fi
         shell: bash
