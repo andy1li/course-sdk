@@ -80,8 +80,7 @@ jobs:
       - name: sanity-check
         run: |
           prefix="build-your-own-"
-          repo=${{github.event.repository.name}}
-          slug="${repo#$prefix}"
+          slug="${${{github.event.repository.name}}#$prefix}"
           echo slug: $slug
           ls -lah $HOME
           ls -lah "$HOME/testers/$slug"
