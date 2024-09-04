@@ -72,9 +72,9 @@ jobs:
         working-directory: courses/${{github.event.repository.name}}
 
       - run: ls -lah $HOME
-      - run: ls -lah $HOME/sqlite
+      - run: ls -lah $HOME/${{github.event.repository.name}}
       - run: |
-          if [ -d $HOME/sqlite ]; then
+          if [ -d $HOME/${{github.event.repository.name}} ]; then
             echo "Directory exist."
           else
             exit 1
