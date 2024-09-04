@@ -4,7 +4,7 @@ import path from "path";
 import fetch from "node-fetch";
 import child_process from "child_process";
 import ShellCommandExecutor from "./shell-command-executor";
-const { Transform } = require("stream");
+import { Transform } from "stream";
 
 type Chunk = Array<{
   chunk: any;
