@@ -4,6 +4,7 @@ import path from "path";
 import fetch from "node-fetch";
 import child_process from "child_process";
 import ShellCommandExecutor from "./shell-command-executor";
+const { Transform } = require("stream");
 
 export default class TesterDownloader {
   static DEFAULT_TESTERS_ROOT_DIR = "/tmp/testers";
@@ -34,9 +35,17 @@ export default class TesterDownloader {
     const artifactUrl = `https://github.com/${this.testerRepositoryName}/releases/download/${latestVersion}/${latestVersion}_linux_amd64.tar.gz`;
     console.log(`Downloading ${artifactUrl}`);
 
+    const inspector = new Transform({
+      transform(chunk, encoding, callback) {
+        // Log the chunk content (convert Buffer to string if needed)
+        console.log("Chunk received:", chunk.toString());
+        callback(null, chunk); // Pass the chunk through unchanged
+      },
+    });
+
     const response = await fetch(artifactUrl);
     console.log("status code", response.status);
-    response.body.pipe(fileStream);
+    response.body.pipe(inspector).pipe(fileStream);
 
     console.log("🎯 After fetch");
 
