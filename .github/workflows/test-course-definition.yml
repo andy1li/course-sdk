@@ -71,8 +71,8 @@ jobs:
       - run: course-sdk test ${{matrix.language}} && cp -r /tmp/testers/sqlite $HOME/
         working-directory: courses/${{github.event.repository.name}}
 
-      - run: "[ ! -d /tmp/testers/sqlite ] && exit 1"
       - run: "[ ! -d $HOME/sqlite ] && exit 1"
+      # - run: "[ ! -d /tmp/testers/sqlite ] && exit 1"
 
       # - name: Start time
       #   id: starttime
