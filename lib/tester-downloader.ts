@@ -35,12 +35,31 @@ export default class TesterDownloader {
     console.log(`Downloading ${artifactUrl}`);
 
     const response = await fetch(artifactUrl);
+    console.log("status code", response.status);
     response.body.pipe(fileStream);
 
+    console.log("🎯 After fetch");
+
     await new Promise((resolve, reject) => {
-      fileStream.on("finish", resolve);
-      fileStream.on("error", reject);
+      const logAndResolve = (msg: string) => () => {
+        console.log(msg);
+        resolve(msg);
+      };
+
+      const logAndReject = (msg: string) => () => {
+        console.log(msg);
+        reject(msg);
+      };
+
+      fileStream.on("finish", logAndResolve("finish"));
+      fileStream.on("error", logAndReject("error"));
+      fileStream.on("close", () => console.log("closed"));
+      fileStream.on("drain", () => console.log("drained"));
+      fileStream.on("pipe", () => console.log("piped"));
+      fileStream.on("unpipe", () => console.log("unpiped"));
     });
+
+    console.log("🎯 After fileStream");
 
     try {
       const tempExtractDir = fs.mkdtempSync("/tmp/extract");
