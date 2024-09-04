@@ -7,7 +7,7 @@ import ShellCommandExecutor from "./shell-command-executor";
 const { Transform } = require("stream");
 
 export default class TesterDownloader {
-  static DEFAULT_TESTERS_ROOT_DIR = "/home/runner";
+  static DEFAULT_TESTERS_ROOT_DIR = "/home/testers";
 
   course: Course;
   testersRootDir: string;
