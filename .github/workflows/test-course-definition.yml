@@ -88,7 +88,7 @@ jobs:
           echo slug: $slug
           ls -lah $HOME
           ls -lah "$HOME/$slug"
-          if [ -d "$HOME/$slug"]; then
+          if [ -d "$HOME/$slug" ]; then
             echo $slug "tester directory exists."
           else
             echo $slug "tester directory does not exist."
