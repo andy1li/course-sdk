@@ -70,7 +70,7 @@ jobs:
 
       - name: course-sdk-test
         run: |
-          echo ${{github.event.repository.name}}
+          echo repo.name: ${{github.event.repository.name}}
           prefix="build-your-own-"
           repo=${{github.event.repository.name}}
           slug="${repo#$prefix}"
@@ -81,42 +81,17 @@ jobs:
 
       - name: sanity-check
         run: |
-          echo ${{github.event.repository.name}}
+          echo repo.name: ${{github.event.repository.name}}
           prefix="build-your-own-"
           repo=${{github.event.repository.name}}
           slug="${repo#$prefix}"
           echo slug: $slug
           ls -lah $HOME
-          ls -lah "$HOME/testers/$slug"
-          if [ -d "$HOME/testers/$slug"]; then
+          ls -lah "$HOME/$slug"
+          if [ -d "$HOME/$slug"]; then
             echo $slug "tester directory exists."
           else
             echo $slug "tester directory does not exist."
             exit 1
           fi
         shell: bash
-
-      # "[ -d $HOME/sqlite ] && exit 1"
-      # - run: "[ ! -d $HOME/sqlite ] && exit 1"
-      # - run: "[ ! -d /tmp/testers/sqlite ] && exit 1"
-
-      # - name: Start time
-      #   id: starttime
-      #   run: echo "start_time=$(date +%s)" >> $GITHUB_ENV
-
-      # - run: course-sdk test ${{matrix.language}}
-      #   working-directory: courses/${{github.event.repository.name}}
-
-      # - name: End time and calculate duration
-      #   id: endtime
-      #   run: |
-      #     echo "end_time=$(date +%s)" >> $GITHUB_ENV
-      #     duration=$(( ${{ env.end_time }} - ${{ env.start_time }} ))
-      #     echo "duration=$duration" >> $GITHUB_ENV
-      #     echo ::set-output name=duration::$duration
-
-      # - name: Check duration
-      #   if: steps.endtime.outputs.duration < 60
-      #   run: |
-      #     echo "The previous step took less than one minute, failing the job."
-      #     exit 1
