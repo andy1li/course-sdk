@@ -71,9 +71,8 @@ jobs:
       - run: course-sdk test ${{matrix.language}}
         working-directory: courses/${{github.event.repository.name}}
 
-      - run: |-
-        ls $HOME/runners
-        ls $SHELL
+      - run: ls $HOME/runners
+      - run: ls $SHELL
 
       # - name: Start time
       #   id: starttime
