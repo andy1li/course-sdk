@@ -6,11 +6,11 @@ import child_process from "child_process";
 import ShellCommandExecutor from "./shell-command-executor";
 import { Transform } from "stream";
 
+type Callback = (error: Error | null, chunk: Chunk) => void;
 type Chunk = Array<{
   chunk: any;
   encoding: BufferEncoding;
 }>;
-type Callback = (error: Error | null, chunk: Chunk) => void;
 
 export default class TesterDownloader {
   static DEFAULT_TESTERS_ROOT_DIR = "/tmp/testers";
@@ -44,9 +44,16 @@ export default class TesterDownloader {
     const response = await fetch(artifactUrl);
     console.log("📩 Response status code:", response.status);
 
+    let i = 0;
+    const limit = 32;
     const inspector = new Transform({
       transform(chunk: Chunk, encoding: BufferEncoding, callback: Callback) {
-        console.log(`🧱 Chunk[length: ${chunk.toString().length}]:`, chunk.toString().slice(0, 32) + "...");
+        if (chunk.toString().length > 0) {
+          i += 1;
+        }
+        if (i < limit) {
+          console.log(`🧱 Chunk[length: ${chunk.toString().length}]:`, chunk.toString().slice(0, 32) + "...");
+        }
         callback(null, chunk);
       },
     });
