@@ -73,8 +73,16 @@ jobs:
 
       - run: ls -lah $HOME
       - run: ls -lah $HOME/sqlite
-      - run: "[ -d $HOME/sqlite ] && exit 1"
-      - run: "[ ! -d $HOME/sqlite ] && exit 1"
+      - run: |
+          if [ -d $HOME/sqlite ]; then
+            echo "Directory exist."
+          else
+            echo "not exists."
+          fi
+        shell: bash
+
+      # "[ -d $HOME/sqlite ] && exit 1"
+      # - run: "[ ! -d $HOME/sqlite ] && exit 1"
       # - run: "[ ! -d /tmp/testers/sqlite ] && exit 1"
 
       # - name: Start time
