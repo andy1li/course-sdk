@@ -77,7 +77,7 @@ jobs:
           if [ -d $HOME/sqlite ]; then
             echo "Directory exist."
           else
-            echo "not exists."
+            exit 1
           fi
         shell: bash
 
