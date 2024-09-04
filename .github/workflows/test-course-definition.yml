@@ -68,7 +68,8 @@ jobs:
       - run: git config --global user.email "hello@codecrafters.io"
       - run: git config --global user.name "codecrafters-bot"
 
-      - run: |
+      - name: course-sdk-test
+        run: |
           prefix="build-you-own-"
           slug="${${{matrix.language}}#$prefix}"
           echo $slug
@@ -82,8 +83,8 @@ jobs:
           slug="${${{matrix.language}}#$prefix}"
           echo $slug
           ls -lah $HOME
-          ls -lah $HOME/testers/$slug
-          if [ -d $HOME/testers/$slug]; then
+          ls -lah "$HOME/testers/$slug"
+          if [ -d "$HOME/testers/$slug"]; then
             echo $slug "tester directory exists."
           else
             echo $slug "tester directory does not exist."
