@@ -41,7 +41,7 @@ export default class TesterDownloader {
     const inspector = new Transform({
       transform(chunk, encoding, callback) {
         if (chunk.toString().length > 0) {
-          i += chunk.toString().length;
+          i += 1;
         }
         if (i < limit) {
           console.log("Chunk length:", chunk.toString().length, chunk.toString().slice(32));
