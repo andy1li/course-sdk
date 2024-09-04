@@ -76,8 +76,9 @@ jobs:
           ls -lah $HOME
           ls -lah $HOME/testers/${{github.event.repository.name}}
           if [ -d $HOME/testers/${{github.event.repository.name}} ]; then
-            echo ${{github.event.repository.name}} "directory exists."
+            echo ${{github.event.repository.name}} "tester directory exists."
           else
+            echo ${{github.event.repository.name}} "tester directory does not exist."
             exit 1
           fi
         shell: bash
