@@ -71,7 +71,7 @@ jobs:
       - run: course-sdk test ${{matrix.language}}
         working-directory: courses/${{github.event.repository.name}}
 
-      - run: ls -lah /tmp/testers
+      - run: "[ ! -d "/tmp/testers/${{github.event.repository.name}}" ] && exit 1"
 
       # - name: Start time
       #   id: starttime
