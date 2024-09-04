@@ -71,9 +71,10 @@ jobs:
       - run: course-sdk test ${{matrix.language}} && cp -r /tmp/testers/sqlite $HOME/
         working-directory: courses/${{github.event.repository.name}}
 
-      - run: ls -lah $HOME
-      - run: ls -lah $HOME/${{github.event.repository.name}}
-      - run: |
+      - name: sanity-check
+        run: |
+          ls -lah $HOME
+          ls -lah $HOME/${{github.event.repository.name}}
           if [ -d $HOME/${{github.event.repository.name}} ]; then
             echo "Directory exist."
           else
