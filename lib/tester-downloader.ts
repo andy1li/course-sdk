@@ -44,7 +44,7 @@ export default class TesterDownloader {
           i += 1;
         }
         if (i < limit) {
-          console.log("Chunk length:", chunk.toString().length, " > ", chunk.toString().slice(32));
+          console.log("Chunk length:", chunk.toString().length, " > ", chunk.toString().slice(0, 32));
         }
         callback(null, chunk); // Pass the chunk through unchanged
       },
