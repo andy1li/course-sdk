@@ -35,14 +35,14 @@ export default class TesterDownloader {
     const artifactUrl = `https://github.com/${this.testerRepositoryName}/releases/download/${latestVersion}/${latestVersion}_linux_amd64.tar.gz`;
     console.log(`Downloading ${artifactUrl}`);
 
-    let chunks = "";
+    let i = 0;
+    const limit = 1024;
 
     const inspector = new Transform({
       transform(chunk, encoding, callback) {
-        // Log the chunk content (convert Buffer to string if needed)
-        chunks += chunk.toString();
-        if (chunks.length < 256) {
-          console.log("Chunks so far:", chunks);
+        i++;
+        if (i < limit) {
+          console.log("Chunks so far:", chunk);
         }
         callback(null, chunk); // Pass the chunk through unchanged
       },
