@@ -71,8 +71,9 @@ jobs:
       - name: course-sdk-test
         run: |
           echo ${{github.event.repository.name}}
-          prefix="your-own-"
-          slug="${${{github.event.repository.name}}#$prefix}"
+          prefix="build-your-own-"
+          repo=${{github.event.repository.name}}
+          slug="${repo#$prefix}"
           echo slug: $slug
           course-sdk test ${{matrix.language}} && cp -r /tmp/testers/$slug $HOME/
         shell: bash
@@ -80,8 +81,10 @@ jobs:
 
       - name: sanity-check
         run: |
-          prefix="your-own-"
-          slug="${${{github.event.repository.name}}#$prefix}"
+          echo ${{github.event.repository.name}}
+          prefix="build-your-own-"
+          repo=${{github.event.repository.name}}
+          slug="${repo#$prefix}"
           echo slug: $slug
           ls -lah $HOME
           ls -lah "$HOME/testers/$slug"
