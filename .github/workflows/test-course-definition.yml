@@ -71,9 +71,8 @@ jobs:
       - run: course-sdk test ${{matrix.language}}
         working-directory: courses/${{github.event.repository.name}}
 
-      - run: |
-        [ ! -d /tmp/testers/sqlite ] && exit 1
-      
+      - run: "[ ! -d /tmp/testers/sqlite ] && exit 1"
+
       # - name: Start time
       #   id: starttime
       #   run: echo "start_time=$(date +%s)" >> $GITHUB_ENV
