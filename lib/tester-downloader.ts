@@ -46,7 +46,7 @@ export default class TesterDownloader {
 
     const inspector = new Transform({
       transform(chunk: Chunk, encoding: BufferEncoding, callback: Callback) {
-        console.log(`🧱 Chunk[length: ${chunk.toString().length}]:`, chunk.toString().slice(0, 64) + "...");
+        console.log(`🧱 Chunk[length: ${chunk.toString().length}]:`, chunk.toString().slice(0, 32) + "...");
         callback(null, chunk);
       },
     });
