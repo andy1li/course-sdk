@@ -68,25 +68,5 @@ jobs:
       - run: git config --global user.email "hello@codecrafters.io"
       - run: git config --global user.name "codecrafters-bot"
 
-      - name: Start time
-        id: starttime
-        run: echo "start_time=$(date +%s)" >> $GITHUB_ENV
-
       - run: course-sdk test ${{matrix.language}}
-      working-directory: courses/${{github.event.repository.name}}
-
-      - name: End time and calculate duration
-        id: endtime
-        run: |
-          echo "end_time=$(date +%s)" >> $GITHUB_ENV
-          duration=$(( ${{ env.end_time }} - ${{ env.start_time }} ))
-          echo "duration=$duration" >> $GITHUB_ENV
-          echo ::set-output name=duration::$duration
-
-      - name: Check duration
-        if: steps.endtime.outputs.duration < 60
-        run: |
-          echo "The previous step took less than one minute, failing the job."
-          exit 1
-
-     
+        working-directory: courses/${{github.event.repository.name}}
