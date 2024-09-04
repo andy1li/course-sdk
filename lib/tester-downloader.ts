@@ -36,7 +36,7 @@ export default class TesterDownloader {
     console.log(`Downloading ${artifactUrl}`);
 
     let i = 0;
-    const limit = 64;
+    const limit = 32;
 
     const inspector = new Transform({
       transform(chunk, encoding, callback) {
