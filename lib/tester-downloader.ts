@@ -40,9 +40,11 @@ export default class TesterDownloader {
 
     const inspector = new Transform({
       transform(chunk, encoding, callback) {
-        i++;
+        if (chunk.toString().length > 0) {
+          i++;
+        }
         if (i < limit) {
-          console.log("Chunks so far:", chunk);
+          console.log("Chunk:", chunk.toString());
         }
         callback(null, chunk); // Pass the chunk through unchanged
       },
