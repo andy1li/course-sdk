@@ -46,7 +46,7 @@ export default class TesterDownloader {
 
     const inspector = new Transform({
       transform(chunk: Chunk, encoding: BufferEncoding, callback: Callback) {
-        console.log(`🧱 Chunk[length: ${chunk.toString().length}]:`, chunk.toString().slice(0, 32) + "...");
+        console.log(`🧱 Chunk[length: ${chunk.toString().length}]:`, chunk.toString().slice(0, 64) + "...");
         callback(null, chunk);
       },
     });
@@ -63,10 +63,10 @@ export default class TesterDownloader {
       };
       fileStream.on("finish", logAndResolve("✅ fileStream finished"));
       fileStream.on("error", logAndReject("❌ fileStream error"));
-      fileStream.on("close", () => console.log("📢 fileStream closed"));
+      fileStream.on("close", () => console.log("👋🏼 fileStream closed"));
       fileStream.on("drain", () => console.log("📢 fileStream drained"));
       fileStream.on("pipe", () => console.log("📢 fileStream piped"));
-      fileStream.on("unpipe", () => console.log("📢 fileStream unpiped"));
+      fileStream.on("unpipe", () => console.log("⛓️‍💥 fileStream unpiped"));
     });
 
     try {
