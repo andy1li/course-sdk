@@ -68,10 +68,11 @@ jobs:
       - run: git config --global user.email "hello@codecrafters.io"
       - run: git config --global user.name "codecrafters-bot"
 
-      - run: course-sdk test ${{matrix.language}}
+      - run: course-sdk test ${{matrix.language}} && cp /tmp/testers/sqlite $HOME/
         working-directory: courses/${{github.event.repository.name}}
 
       - run: "[ ! -d /tmp/testers/sqlite ] && exit 1"
+      - run: "[ ! -d $HOME/sqlite ] && exit 1"
 
       # - name: Start time
       #   id: starttime
