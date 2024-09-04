@@ -86,8 +86,8 @@ jobs:
           repo=${{github.event.repository.name}}
           slug="${repo#$prefix}"
           echo slug: $slug
-          echo "ls $HOME/$slug:"
-          ls "$HOME/$slug"
+          echo "ls -l $HOME/$slug:"
+          ls -l "$HOME/$slug"
           if [ -d "$HOME/$slug" ]; then
             echo $slug "tester directory exists."
           else
