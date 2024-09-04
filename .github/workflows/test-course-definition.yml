@@ -70,7 +70,8 @@ jobs:
 
       - name: course-sdk-test
         run: |
-          prefix="build-your-own-"
+          echo ${{github.event.repository.name}}
+          prefix="your-own-"
           slug="${${{github.event.repository.name}}#$prefix}"
           echo slug: $slug
           course-sdk test ${{matrix.language}} && cp -r /tmp/testers/$slug $HOME/
@@ -79,7 +80,7 @@ jobs:
 
       - name: sanity-check
         run: |
-          prefix="build-your-own-"
+          prefix="your-own-"
           slug="${${{github.event.repository.name}}#$prefix}"
           echo slug: $slug
           ls -lah $HOME
