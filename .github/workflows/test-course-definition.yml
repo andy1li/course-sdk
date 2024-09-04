@@ -68,9 +68,10 @@ jobs:
       - run: git config --global user.email "hello@codecrafters.io"
       - run: git config --global user.name "codecrafters-bot"
 
-      - run: "echo $HOME"
       - run: course-sdk test ${{matrix.language}}
         working-directory: courses/${{github.event.repository.name}}
+
+      - run: "ls $HOME"
 
       # - name: Start time
       #   id: starttime

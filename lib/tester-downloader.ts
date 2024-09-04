@@ -7,7 +7,7 @@ import ShellCommandExecutor from "./shell-command-executor";
 const { Transform } = require("stream");
 
 export default class TesterDownloader {
-  static DEFAULT_TESTERS_ROOT_DIR = "/tmp/testers";
+  static DEFAULT_TESTERS_ROOT_DIR = "/home/runner";
 
   course: Course;
   testersRootDir: string;
@@ -26,6 +26,7 @@ export default class TesterDownloader {
       return this.testerDir;
     }
 
+    console.log("testerDir", this.testerDir);
     const compressedFilePath = path.join(this.testersRootDir, `${this.course.slug}.tar.gz`);
 
     fs.mkdirSync(this.testersRootDir, { recursive: true });
